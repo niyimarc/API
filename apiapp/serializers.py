@@ -8,9 +8,9 @@ class TestApiSerializer(serializers.ModelSerializer):
         # the model you want to work on 
         model = BlogPost
         # the specific fields you want to output 
-        # fields = ("post_title", "post_category", "post_contents",) 
+        fields = ("id", "post_title", "post_category", "post_contents",) 
         # if you want all the fields in the model to be output
-        fields = "__all__"
+        # fields = "__all__"
 
 
 
