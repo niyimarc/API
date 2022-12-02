@@ -17,8 +17,8 @@ STATUS = (
 
 # create a model to post on blog 
 class BlogPost(models.Model):
-    post_title = models.CharField(max_length =150, verbose_name = 'Post Title')
-    post_category = models.ForeignKey(PostCategory, on_delete = models.CASCADE, verbose_name = 'Post Category')
+    post_title = models.CharField(max_length =150)
+    post_category = models.ForeignKey(PostCategory, on_delete = models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     post_contents = models.TextField()
