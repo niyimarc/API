@@ -17,11 +17,19 @@ class TestApi(APIView):
         serializer = TestApiSerializer(data=request.data)
         # is_valid will check based on what will define in our TestApiSerializer 
         serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return JsonResponse({"data": serializer.data})
 
-        new_blog_post = BlogPost.objects.create(
-            post_title = request.data["post_title"],
-            post_category_id = request.data["post_category_id"],
-            post_contents = request.data["post_contents"],
-        )
-        # the model_to_dict() convert the model into a dictionary
-        return JsonResponse({"data": TestApiSerializer(new_blog_post).data})
+    def put(self, request, *args, **kwargs):
+        # incase id doesnt exist use None as the default value 
+        model_id = kwargs.get("id", None)
+        if not model_id:
+            return JsonResponse({"error": "method /PUT/ is not allowed."})
+        try:
+            instance = BlogPost.objects.get(id=model_id)
+        except:
+            return JsonResponse({"error": "object does not exist."})
+        serializer = TestApiSerializer(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return JsonResponse({"data": serializer.data})
