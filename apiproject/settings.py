@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+# import decouple so you can make use .env 
+# to hide sensitive info like db connection variables 
+from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,7 +43,11 @@ INSTALLED_APPS = [
     'apiapp',
     'rest_framework',
     'debug_toolbar',
+    'user',
 ]
+
+# the custom user model 
+AUTH_USER_MODEL = "user.CustomUser"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,10 +88,20 @@ WSGI_APPLICATION = 'apiproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
+DB_NAME = config("NAME")
+DB_USER = config("USER")
+DB_PASSWORD = config("PASSWORD")
+DB_HOST = config("HOST")
+DB_PORT = config("PORT")
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
 
