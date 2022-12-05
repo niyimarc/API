@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'debug_toolbar',
     'user',
+    'gateway',
 ]
 
 # the custom user model 

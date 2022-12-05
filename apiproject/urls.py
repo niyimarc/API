@@ -10,6 +10,7 @@ router.register("api", ViewsetTestApi)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include(router.urls)),
+    path("gateway/", include("gateway.urls")),
 ]
 
 if settings.DEBUG:
