@@ -61,6 +61,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": ("gateway.authentications.Authentication", )
+}
+
 INTERNAL_IPS = (
     "127.0.0.1",
 )
